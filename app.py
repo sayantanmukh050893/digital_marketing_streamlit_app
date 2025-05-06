@@ -6,17 +6,13 @@ import requests
 import time
 import plotly.express as px
 
-#import os
-from concurrent.futures import ThreadPoolExecutor
-#os.environ["HUGGINGFACEHUB_API_TOKEN"] = "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"
+hf_token = st.secrets["HUGGINGFACE_API_TOKEN"]
+API_URL = st.secrets["API_URL"]
+model_id = st.secrets["MODEL_ID"]
 
-
-API_URL = "https://router.huggingface.co/together/v1/chat/completions"
 headers = {
-    "Authorization": "Bearer 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",
+    "Authorization": "Bearer "+hf_token
 }
-
-model_id = "Qwen/Qwen2.5-Coder-32B-Instruct"
 
 def query(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
@@ -224,7 +220,7 @@ if uploaded_file and vertical and month and year:
                         "content": query_text
                     }
                 ],
-                "model": "Qwen/Qwen2.5-Coder-32B-Instruct"
+                "model": model_id
                 })
                 #time.sleep(2)
             response_text = response["choices"][0]["message"]["content"].strip()
