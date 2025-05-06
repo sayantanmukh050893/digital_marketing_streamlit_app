@@ -1,0 +1,11 @@
+pandas
+numpy
+scikit-learn
+matplotlib
+streamlit
+requests
+plotly
+time
+datetime
+math
+functools
