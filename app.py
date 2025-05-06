@@ -43,8 +43,9 @@ def loading_spinner_with_gif(gif_url="https://media.giphy.com/media/3oEjI6SIIHBd
     with gif_placeholder.container():
         st.markdown(f"""
         <div style="text-align: center;">
-            <img src="{gif_url}" width="120" style="background: transparent;">
-            <p style="font-size: 1.2em;"></p>
+            <br></br>
+            <img src="{gif_url}" width="60" style="background: transparent;">
+            <p style="font-size: 1.2em;">LOADING</p>
         </div>
         """, unsafe_allow_html=True)
     return gif_placeholder
@@ -114,10 +115,11 @@ if uploaded_file and vertical and month and year:
         tab1, tab2 = st.tabs(["Analysis", "Recommendations"])
 
         with tab1:
-            st.subheader("📈 Graphical representation")
+            st.markdown("<h3 style='font-size: 26px;'>📈 Graphical representation</h3>", unsafe_allow_html=True)
+            #st.subheader("📈 Graphical representation")
             tab_graph1, tab_graph2, tab_graph3, tab_graph4, tab_graph5 = st.tabs(["Media Spend by Platform", "Media Spend by Ad type","Media Spend by Ad - Demand Side","Media Spend by Ad - Biddable","Media Spend by Ad - Social"])
             with tab_graph1:
-                st.subheader("💸 Media Spend by Platform")
+                #st.subheader("💸 Media Spend by Platform")
                 spend_by_platform = summary.groupby("platform")["media_cost"].sum().reset_index()
 
                 fig1 = px.pie(
@@ -135,7 +137,7 @@ if uploaded_file and vertical and month and year:
                 st.plotly_chart(fig1, use_container_width=True)
             
             with tab_graph2:
-                st.subheader("💸 Media Spend by Ad type")
+                #st.subheader("💸 Media Spend by Ad type")
                 #summary["estimated_ctr"] = summary["estimated_ctr"].astype(str)
                 #summary["estimated_ctr"] = pd.to_numeric(summary["estimated_ctr"], errors="coerce")
                 spend_by_ad_type = summary.groupby("type")["media_cost"].sum().reset_index()
@@ -155,7 +157,7 @@ if uploaded_file and vertical and month and year:
                 st.plotly_chart(fig2, use_container_width=True)
 
             with tab_graph3:
-                st.subheader("💸 Media Spend - Demand Side")
+                #st.subheader("💸 Media Spend - Demand Side")
                 #summary["estimated_ctr"] = summary["estimated_ctr"].astype(str)
                 #summary["estimated_ctr"] = pd.to_numeric(summary["estimated_ctr"], errors="coerce")
                 summary_demand_side = summary[summary["platform"]=="demand-side"]
@@ -176,7 +178,7 @@ if uploaded_file and vertical and month and year:
                 st.plotly_chart(fig3, use_container_width=True)
 
             with tab_graph4:
-                st.subheader("💸 Media Spend - Biddable")
+                #st.subheader("💸 Media Spend - Biddable")
                 #summary["estimated_ctr"] = summary["estimated_ctr"].astype(str)
                 #summary["estimated_ctr"] = pd.to_numeric(summary["estimated_ctr"], errors="coerce")
                 summary_biddable = summary[summary["platform"]=="biddable"]
@@ -197,7 +199,7 @@ if uploaded_file and vertical and month and year:
                 st.plotly_chart(fig4, use_container_width=True)
 
             with tab_graph5:
-                st.subheader("💸 Media Spend - Social")
+                #st.subheader("💸 Media Spend - Social")
                 #summary["estimated_ctr"] = summary["estimated_ctr"].astype(str)
                 #summary["estimated_ctr"] = pd.to_numeric(summary["estimated_ctr"], errors="coerce")
                 summary_social = summary[summary["platform"]=="social"]
@@ -219,6 +221,7 @@ if uploaded_file and vertical and month and year:
 
 
         with tab2:
+            st.markdown("<h3 style='font-size: 26px;'>💬 Future Recommendation</h3>", unsafe_allow_html=True)
             #st.subheader("💬 Future Recommendation for different campaigns")
             #tab3 = st.tabs(["Branding", "Performance", "Branding + Performance"])
 
