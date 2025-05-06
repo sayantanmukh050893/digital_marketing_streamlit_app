@@ -37,6 +37,18 @@ def type_text_multi(tab_placeholders, texts, delay=0.01):
                 tab_placeholders[j].markdown(typed_texts[j])
         time.sleep(delay)
 
+def loading_spinner_with_gif(gif_url="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"):
+    # Display loading GIF and message
+    gif_placeholder = st.empty()
+    with gif_placeholder.container():
+        st.markdown(f"""
+        <div style="text-align: center;">
+            <img src="{gif_url}" width="120" style="background: transparent;">
+            <p style="font-size: 1.2em;"></p>
+        </div>
+        """, unsafe_allow_html=True)
+    return gif_placeholder
+
 # def task_query_for_branding(sample_query):
 #     time.sleep(2)
 
@@ -207,21 +219,25 @@ if uploaded_file and vertical and month and year:
 
 
         with tab2:
-            st.subheader("💬 Future Recommendation for different campaigns")
+            #st.subheader("💬 Future Recommendation for different campaigns")
             #tab3 = st.tabs(["Branding", "Performance", "Branding + Performance"])
 
             #with tab3:
+            spinner = loading_spinner_with_gif(
+        gif_url="https://media.tenor.com/WX_LDjYUrMsAAAAj/loading.gif"  # Choose any large GIF
+    )
             placeholder1 = st.empty()
-            with st.spinner("Analyzing..."):
-                response = query({
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": query_text
-                    }
-                ],
-                "model": model_id
-                })
+            #with st.spinner("Analyzing..."):
+            response = query({
+            "messages": [
+                {
+                    "role": "user",
+                    "content": query_text
+                }
+            ],
+            "model": model_id
+            })
+            spinner.empty()
                 #time.sleep(2)
             response_text = response["choices"][0]["message"]["content"].strip()
             type_text(response_text, delay=0.01)
